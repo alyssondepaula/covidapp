@@ -1,0 +1,23 @@
+{
+    "languagePortuguese": "Português",
+    "languageEnglish": "Inglês",
+    "start": "Começar",
+    "changeIdiom": "Selecione o seu idioma",
+    "welcome": "Seja bem vindo, vamos fazer uma rapida análise. Esse aplicativo não substitui o exame diagnostico.",
+    "ask1": "Esteve em local publico como: bar, restaurante, cinema, shopping center ou outros locais publicos?",
+    "ask11": "Nesses locais ultilizou Mascara ?",
+    "ask2": "Teve contato com outras pessoas que estavam sem mascara ?",
+    "ask23": "Quantas horas voce ficou nesse estabelecimento: 2 horas, 4 horas, 6 horas, + de 6 horas?",
+    "ask3": "Utilizou alcool em Gel?",
+    "ask4": "Atualmente está trabalhando em casa ou no local do trabalho ?",
+    "ask99": "Atualmente ou recentemente você sentiu febre, tosse,espirro e dificuldade em respirar?",
+    "near": "Encontre hospitais próximos",
+    "okay": "Eu estou bem!",
+
+    "resulteasy": "Seu resultado parece normal, mantenha as regras de distanciamento e refaça a avaliação no app daqui a 14 dias",
+    "resulthard": "Seu resultado foi preocupante recomendamos ir ao hospital mais proximo",
+
+    "permission": "Você precisa aceitar o acesso a localização",
+
+    "search": "hospitais próximos"
+}

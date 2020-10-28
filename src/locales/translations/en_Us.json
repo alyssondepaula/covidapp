@@ -1,0 +1,24 @@
+{
+    "languagePortuguese": "Portuguese",
+    "languageEnglish": "English",
+    "start": "Start",
+    "changeIdiom": "Select your language",
+    "welcome": "Welcome, let's do a quick analysis. This application does not replace the diagnostic exam.",
+    "ask1": "Have you been in a public place such as:bars, restaurants, cinema, shopping centers or any other public places",
+    "ask11": "Did you wearmask in those places?",
+    "ask2": "Have you had contact with other people without a mask?",
+    "ask23": "How many hours did you stayed in that establishment: 2 hours, 4 hours, 6 hours, + 6 hours?",
+    "ask3": "Did you use hand sanitizer?",
+    "ask4": "Are you currently working from home or at work?",
+    "ask99": "Do you currently or recently have a fever, cough, sneeze and difficulty breathing?",
+    "near": "Find nearby Hospitals",
+    "okay": "I am fine!",
+
+    "resulteasy": "Seu resultado parece instavél, mantenha as regras de distanciamento e refaça a avaliação no app daqui a 14 dias",
+    "resulthard": "Seu resultado foi preocupante recomendamos ir ao hospital mais proximo",
+
+    "permission": "You need to accept location access",
+
+
+    "search": "nearby hospitals"
+}

@@ -1,0 +1,46 @@
+{
+    "asker": [
+        {
+            "id": 99,
+            "ask": "ask99",
+            "active": false,
+            "value": 10
+        },
+        {
+            "id": 1,
+            "ask": "ask1",
+            "active": false,
+            "value": 2
+        },
+        {
+            "id": 11,
+            "ask": "ask11",
+            "active": false,
+            "value": 3
+        },
+        {
+            "id": 2,
+            "ask": "ask2",
+            "active": false,
+            "value": 5
+        },
+        {
+            "id": 23,
+            "ask": "ask23",
+            "active": false,
+            "value": 2
+        },
+        {
+            "id": 3,
+            "ask": "ask3",
+            "active": false,
+            "value": 2
+        },
+        {
+            "id": 4,
+            "ask": "ask4",
+            "active": false,
+            "value": 2
+        }
+    ]
+}
