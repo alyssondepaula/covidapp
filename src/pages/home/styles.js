@@ -25,13 +25,12 @@ export const InsideRoundTop = styled.View`
    flex-direction: column;
    align-items:flex-start;
    justify-content: center;
-   margin-left: 14px;
+   margin-left: 1px;
   
 `;
 
 export const InsideRoundTopTwo = styled.View`
-
-  width: ${windowWidth * 0.4}px;
+  width: ${windowWidth * 0.40}px;
   height: ${windowHeight * 0.40}px;
    flex-direction: column;
    align-items:flex-end;

@@ -1,12 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
-import React from 'react';
-import Routes from './src/Routes';
+import React, {useEffect, useState } from 'react';
+import { NotLog, Log} from './src/Routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 function App() {
+
+  const[auth, setAuth] = useState(false)
+
+  useEffect(() => {
+
+    async function init(){
+
+        const value = await AsyncStorage.getItem('@sum')
+        if(value !== 'false') {
+                    setAuth(true)
+        }
+    }
+
+    init()
+  });
+
+  useEffect(() => {
+    console.log(auth.toString())
+  },[auth]);
+
+
+
+
   return <>
     <StatusBar style="dark-content" />
-    <Routes />
+    {auth === true ? <Log /> : < NotLog/> }
   </>
 
 }

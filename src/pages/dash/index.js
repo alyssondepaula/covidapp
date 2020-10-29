@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { View, Platform } from 'react-native';
 import { set } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
@@ -7,6 +7,11 @@ import { Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { translate } from '../../locales/index';
 import { useTranslation } from 'react-i18next'
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+import notifications from '../../assets/notifications.json';
+
+
 
 
 
@@ -16,7 +21,8 @@ import {
     Container,
     RoundTop,
     InputName,
-    ButtonComecar,
+    Tips,
+    TipsButton,
     TextSelectIdioma,
     ButtonChangeIdioma,
     TextBemVindo,
@@ -30,6 +36,13 @@ import {
 } from './styles';
 
 const dash = ({ navigation }) => {
+
+
+    navigation.reset({
+        index: 0,
+        routes: [{name: 'Dash'}],
+      });
+
 
     const { t, i18n } = useTranslation('language');
 
@@ -58,47 +71,59 @@ const dash = ({ navigation }) => {
         fontText == 24 ? setFontText(0) : setFontText(24)
     }
 
+
+    // Prepare the notification channel
+Notifications.setNotificationChannelAsync('new-emails', {
+    name: 'E-mail notifications',
+    importance: Notifications.AndroidImportance.HIGH,
+    sound: 'email-sound.wav', // <- for Android 8.0+, see channelId property below
+  });
+  
+  // Eg. schedule the notification
+  Notifications.scheduleNotificationAsync({
+  content: {
+    title: () => { 
+       const number = Math.floor(Math.random() * 10 + 1)
+       notifications.notifications.map(ntf=>{
+           if(ntf.id == number) { return ntf.notification }
+       })
+       return 'Error'
+    }
+  },
+  trigger: {
+    seconds: 120,
+    repeats: true
+  },
+});
+
+async function getNotification() {
+    // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
+    const { status, permissions } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (status === 'granted') {
+        console.log('Notification permissions granted.')
+    } else {
+      Alert.alert(translate('permission'))
+    }
+  }
+
+  useEffect(() => {
+    async function init(){
+        getNotification()
+    }
+             init()
+  });
+
+
     return <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
-        <Modal
-            style={{
-                backgroundColor: '#fff',
-                width: windowWidth * 0.7,
-                height: windowHeight * 0.45,
-                borderRadius: 24
-            }}
-            position='center'
-            isOpen={openBox}
-        >
-            <View style={{ flex: 1 }}>
-                <ModalClose>
-                    <Ionicons onPress={openBoxModal}
-                        name="md-close"
-                        size={30}
-                        color="gray" />
-                </ModalClose>
-                <TxtSelectIdiom>{translate('changeIdiom')}</TxtSelectIdiom>
-                <ChangetoPt onPress={() => onPressLanguage('portuguese')}>
-                    <TxtSelectIdiom>
-                        {translate('languagePortuguese')}
-                    </TxtSelectIdiom>
-                </ChangetoPt>
-                <ChangetoUs onPress={() => onPressLanguage('portuguese')}>
-                    <TxtSelectIdiom>
-                        {translate('languageEnglish')}
-                    </TxtSelectIdiom>
-                </ChangetoUs>
-            </View>
-
-
-        </Modal>
         <RoundTop>
             <InsideRoundTop>
                 <ButtonChangeIdioma
                     style={{ marginRight: 24, marginTop: 18, justifyContent: "center", alignItems: "center" }}
-                    onPress={openBoxModal}
+                    onPress={()=>{
+                        navigation.navigate('Ask', {})}}
 
                 >
-                    <TextSelectIdioma style={{ alignSelf: "center", margin: 8 }}>{translate('changeIdiom')}</TextSelectIdioma>
+                    <TextSelectIdioma style={{ alignSelf: "center", margin: 8 }}>{translate('replay')}</TextSelectIdioma>
                 </ButtonChangeIdioma>
             </InsideRoundTop>
             <InsideRoundTopTwo>
@@ -118,22 +143,11 @@ const dash = ({ navigation }) => {
             </InsideRoundTopTwo>
         </RoundTop>
         <RoundBottom>
-            <TextBemVindo
-                style={{ fontSize: fontText }}>{translate('welcome')}</TextBemVindo>
-            <InputName
-                onChangeText={text => setName(text)}
-                onFocus={changeFont}
-                onSubmitEditing={changeFont}
-            ></InputName>
-            <ButtonComecar
-                onPress={() => {
-                    /* 1. Navigate to the Details route with params */
-                    navigation.navigate('Ask', {
-                        nameUser: name,
-                    });
-                }} >
+            
+            <Tips>
+                <TipsButton/>
                 <TextSelectIdioma>{translate('start')}</TextSelectIdioma>
-            </ButtonComecar>
+            </Tips>
         </RoundBottom>
 
     </Container >;

@@ -3,7 +3,8 @@
     "languageEnglish": "Inglês",
     "start": "Começar",
     "changeIdiom": "Selecione o seu idioma",
-    "welcome": "Seja bem vindo, vamos fazer uma rapida análise. Esse aplicativo não substitui o exame diagnostico.",
+    "welcome": "Vamos fazer uma rápida análise. Esse aplicativo não substitui o exame diagnostico.",
+    "welcomename": "Seja bem vindo!",
     "ask1": "Esteve em local publico como: bar, restaurante, cinema, shopping center ou outros locais publicos?",
     "ask11": "Nesses locais ultilizou Mascara ?",
     "ask2": "Teve contato com outras pessoas que estavam sem mascara ?",
@@ -19,5 +20,27 @@
 
     "permission": "Você precisa aceitar o acesso a localização",
 
-    "search": "hospitais próximos"
+    "search": "hospitais próximos",
+
+    "notification1": "Evite tocar nos olhos, nariz e boca com as mãos não lavadas.",
+    "notification2": "Use mascara sempre que encontrar uma pessoa ou ao deslocar-se lugares públicos.",
+    "notification3": "Que tal lavar suas mãos agora ?",
+    "notification4": "Borá passar um alcool em gel ?",
+    "notification5": "Se estiver em ambiente compartilhado abra janelas e portas ! Não esqueça da mascara.",
+    "notification6": "Não esqueça de lavar os talheres com água sanitaria.",
+    "notification7": "Mantenha uma distância de pelo menos 2 metros entre você e qualquer pessoa que esteja tossindo ou espirrando.",
+    "notification8": "Procure atendimento médico se tiver dificuldade para respirar e febre alta.",
+    "notification9": "Cubra a boca e o nariz com o cotovelo dobrado ou com um lenço de papel ao tossir",
+    "notification10": "Mesmo quando você conhecer uma pessoa, use uma máscara ao falar.",
+
+    "replay": "Refazer avaliação",
+
+    "backexit" : "Deseja sair do App?",
+    "yes": "Sim",
+    "no": "Não",
+    "atettion":"Atenção",
+    "ContagionLevel": "Nível de contágio"
+
+
+
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import home from './pages/home';
@@ -18,7 +18,7 @@ function HomeScreen() {
 
 const Stack = createStackNavigator();
 
-function Routes() {
+export function NotLog() {
     return (
         <NavigationContainer>
             <Stack.Navigator headerMode='none' initialRouteName='Home'>
@@ -31,4 +31,15 @@ function Routes() {
     );
 }
 
-export default Routes;
+export function Log() {
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator headerMode='none' initialRouteName='Dash'>
+                <Stack.Screen name="Dash" component={dash} />
+                <Stack.Screen name="Ask" component={ask} />
+                <Stack.Screen name="Result" component={result} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}

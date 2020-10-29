@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, FlatList, TouchableOpacity, StyleSheet, StatusBar, Text, SafeAreaView, Alert } from 'react-native';
+import { View, ScrollView, BackHandler, TouchableOpacity, StyleSheet, StatusBar, Text, SafeAreaView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import asks from '../../assets/asks.json';
 import { translate } from '../../locales/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -24,12 +25,31 @@ const ask = ({ route, navigation }) => {
 
 
 
+   const [soma, setSoma] = useState(0)
+    const [toHospital, setToHospital] = useState(false)
+    const [currentData, setCurrentData] = useState(asks)
 
     const { nameUser } = route.params;
-    const currentData = asks;
 
-    const [soma, setSoma] = useState(0)
-    const [toHospital, setToHospital] = useState(false)
+    useEffect(() => {
+
+        async function init(){
+
+            const value = await AsyncStorage.getItem('@askers')
+            if(value !== null) {
+                setCurrentData(JSON.parse(value))
+            }
+
+            currentData.asker.map(ask =>{
+
+                if(ask.active==true){ soma+ask.value}
+
+            })
+        }
+
+        init()
+      },[]);
+      
 
     useEffect(() => {
 
@@ -37,18 +57,52 @@ const ask = ({ route, navigation }) => {
         if(soma>10) setSoma(10)
         if(soma>5) setToHospital(true) 
         if(soma<5) setToHospital(false)
+
+        async function store(){
+        
+            try {
+                soma > 0 ? await AsyncStorage.setItem('@sum', 'true')
+                : await AsyncStorage.setItem('@sum', 'false')
+                    
+                const jsonValue = JSON.stringify(currentData)
+                await AsyncStorage.setItem('@askers', jsonValue)
+
+                const nameStore = nameUser.toString()
+                await AsyncStorage.setItem('@nameuser', nameStore)
+              } catch (e) {
+                // saving error
+              }
+
+        }
+        store();
+
       },[soma]);
 
       useEffect(() => {
           console.log(toHospital.toString())
       },[toHospital]);
 
-
+      useEffect(() => {
+        const backAction = () => {
+          Alert.alert(translate('atettion'), translate('backexit'), [
+            {
+              text: translate('no'),
+              onPress: () => null,
+              style: 'cancel',
+            },
+            { text: translate('yes'), onPress: () => BackHandler.exitApp() },
+          ]);
+          return true;
+        };
     
-
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    
+        return () => backHandler.remove();
+      }, []);
+    
     return <Container>
         <Header>
-            <Ionicons name="ios-arrow-back" size={36} color="#8C89FA" />
+            <Ionicons name="ios-arrow-back" size={36} color="#8C89FA" onPress={()=>     navigation.goBack() }/>
         </Header>
 
         <NameView>

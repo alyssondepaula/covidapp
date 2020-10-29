@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, BackHandler } from 'react-native';
 import { set } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modalbox'
@@ -58,8 +58,10 @@ const home = ({ navigation }) => {
         fontText == 24 ? setFontText(0) : setFontText(24)
     }
 
+    
+
     return <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
-        <Modal
+   {  /*   <Modal
             style={{
                 backgroundColor: '#fff',
                 width: windowWidth * 0.7,
@@ -69,8 +71,8 @@ const home = ({ navigation }) => {
             position='center'
             isOpen={openBox}
         >
-            <View style={{ flex: 1 }}>
-                <ModalClose>
+           <View style={{ flex: 1 }}>
+               <ModalClose>
                     <Ionicons onPress={openBoxModal}
                         name="md-close"
                         size={30}
@@ -87,20 +89,23 @@ const home = ({ navigation }) => {
                         {translate('languageEnglish')}
                     </TxtSelectIdiom>
                 </ChangetoUs>
-            </View>
+            </View> 
 
 
-        </Modal>
+        </Modal> 
+          */ }
         <RoundTop>
             <InsideRoundTop>
-                <ButtonChangeIdioma
+        <TextSelectIdioma style={{ alignSelf: "flex-start", margin: 36 }}>{translate('welcomename')} {name}</TextSelectIdioma>
+
+                          {/*  <ButtonChangeIdioma
                     style={{ marginRight: 24, marginTop: 18, justifyContent: "center", alignItems: "center" }}
                     onPress={openBoxModal}
 
                 >
                     <TextSelectIdioma style={{ alignSelf: "center", margin: 8 }}>{translate('changeIdiom')}</TextSelectIdioma>
-                </ButtonChangeIdioma>
-            </InsideRoundTop>
+                </ButtonChangeIdioma>*/}
+           </InsideRoundTop> 
             <InsideRoundTopTwo>
                 <LottieView
                     autoPlay={true}

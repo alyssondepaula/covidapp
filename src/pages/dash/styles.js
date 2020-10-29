@@ -62,16 +62,23 @@ export const InputName = styled.TextInput`
 `;
 
 
-export const ButtonComecar = styled.TouchableOpacity`
+export const Tips = styled.View`
   position: absolute;
-  background-color: #8C89FA;
-  width: ${windowWidth * 0.95}px;
-   height: ${windowHeight * 0.08}px;
-   bottom: 12px;
+  background-color: transparent;
+  border: 3px;
+  border-color: #8C89FA;
+  width: ${windowWidth * 0.33}px;
+   height: ${windowHeight * 0.25}px;
+   bottom: 36px;
    border-radius: 14px;
    justify-content:center;
    align-items:center;
    align-self: center;
+`;
+export const TipsButton = styled.View`
+  flex: 1;
+  width: 100%;
+  background-color: green;
 `;
 
 export const ButtonChangeIdioma = styled.TouchableOpacity`

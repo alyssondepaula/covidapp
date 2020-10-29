@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Alert, Platform } from 'react-native';
+import { View, Text, Button, Alert, Platform, BackHandler } from 'react-native';
 import { translate } from '../../locales/index';
 import * as Permissions from 'expo-permissions';
 import * as Linking from 'expo-linking';
@@ -27,6 +27,26 @@ const result = ({ route, navigation }) => {
              percentage()
              console.log(percentageNumber+' %')
   },[]);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert(translate('atettion'), translate('backexit'), [
+        {
+          text: translate('no'),
+          onPress: () => null,
+          style: 'cancel',
+        },
+        { text: translate('yes'), onPress: () => BackHandler.exitApp() },
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove();
+  }, []);
+
+  
 
 
   async function getLocationAsync() {
@@ -64,10 +84,7 @@ onPress={()=>{
      </ButtontoHospital> : null}
       <ButtonDash  style={{marginVertical: 8}} 
       onPress={()=>{
-        
-
-
-          
+        navigation.navigate('Dash', {})
 }}>
 <TextResultButton>{translate('okay')}</TextResultButton>
       </ButtonDash>
