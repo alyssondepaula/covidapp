@@ -23,8 +23,8 @@
       "favicon": "./assets/favicon.png"
     },
     "androidStatusBar": {
-      "barStyle": "dark-content",
-      "backgroundColor": "#ffffff"
+      "barStyle": "light-content",
+      "backgroundColor": "#8C89FA"
     },
     "android":{
       "permissions":["LOCATION, NOTIFICATIONS"],
