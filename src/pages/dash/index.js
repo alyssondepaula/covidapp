@@ -1,21 +1,10 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
-import { View, Platform } from 'react-native';
-import { set } from 'react-native-reanimated';
+import { View, Platform, BackHandler, Alert} from 'react-native';
 import LottieView from 'lottie-react-native';
-import Modal from 'react-native-modalbox'
 import { Dimensions } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { translate } from '../../locales/index';
-import { useTranslation } from 'react-i18next'
-import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
-import notifications from '../../assets/notifications.json';
-
-
-
-
-
-
+import { useNavigation } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
 
 import {
     Container,
@@ -32,103 +21,82 @@ import {
     ModalClose,
     TxtSelectIdiom,
     ChangetoPt,
-    ChangetoUs
+    ChangetoUs,
+    ButtonToHospital,
+    SignOutButton,
+    TextSignOutButton
 } from './styles';
+import { useAuth } from '../../context/auth';
 
-const dash = ({ navigation }) => {
+const dash = () => {
 
-
-    navigation.reset({
-        index: 0,
-        routes: [{name: 'Dash'}],
-      });
-
-
-    const { t, i18n } = useTranslation('language');
-
-    const languages = useMemo(() => {
-        return [
-            { name: t('portuguese'), id: 'pt-BR' },
-            { name: t('english'), id: 'en-US' },
-        ];
-    }, [i18n.language]);
-
-    const onPressLanguage = useCallback(language => {
-        i18n.changeLanguage(language);
-    }, []);
+    const navigation = useNavigation();
+    const { signOut} = useAuth();
+    
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
 
-    const [name, setName] = useState(null)
-    const [fontText, setFontText] = useState(24)
-    const [openBox, setOpenBox] = useState(false)
+    const Loggout = () => {
+        Alert.alert(translate('atettion'), translate('backexit'), [
+          {
+            text: translate('no'),
+            onPress: () => null,
+            style: 'cancel',
+          },
+          { text: translate('yes'), onPress: () => {
+          signOut() }},
+        ]);
+        return true;
+      };
 
-    function openBoxModal() {
-        setOpenBox(!openBox)
-    }
+      useEffect(() => {
+        const back = () => { BackHandler.exitApp() };
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', back);
+        return () => backHandler.remove();
+      }, []);
 
-    function changeFont(tamanho) {
-        fontText == 24 ? setFontText(0) : setFontText(24)
-    }
-
-
-    // Prepare the notification channel
-Notifications.setNotificationChannelAsync('new-emails', {
-    name: 'E-mail notifications',
-    importance: Notifications.AndroidImportance.HIGH,
-    sound: 'email-sound.wav', // <- for Android 8.0+, see channelId property below
-  });
-  
-  // Eg. schedule the notification
-  Notifications.scheduleNotificationAsync({
-  content: {
-    title: () => { 
-       const number = Math.floor(Math.random() * 10 + 1)
-       notifications.notifications.map(ntf=>{
-           if(ntf.id == number) { return ntf.notification }
-       })
-       return 'Error'
-    }
-  },
-  trigger: {
-    seconds: 120,
-    repeats: true
-  },
-});
-
-async function getNotification() {
-    // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
-    const { status, permissions } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    if (status === 'granted') {
-        console.log('Notification permissions granted.')
-    } else {
-      Alert.alert(translate('permission'))
-    }
-  }
-
-  useEffect(() => {
-    async function init(){
-        getNotification()
-    }
-             init()
-  });
-
-
-    return <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
+    return <Container>
+        <View style={{width: windowWidth, height: windowHeight*0.05, backgroundColor: '#8C89FA', zIndex: 10}}>
+        <SignOutButton
+         style={{ alignSelf: "flex-end", margin:windowHeight*0.03}}
+         onPress={Loggout}
+         >
+        <TextSignOutButton>{translate('exit')}</TextSignOutButton>
+        </SignOutButton>
+        </View>
         <RoundTop>
             <InsideRoundTop>
+                <ButtonToHospital
+                    style={{ marginRight: 24, marginTop: 18, justifyContent: "center", alignItems: "center" }}
+                    onPress={()=>{
+                        const scheme = Platform.select({ ios: 'maps:?q=', android: 'geo:?q=' });
+                        const latLng = `${0},${0}`;
+                        const label = translate('search');
+                        const url = Platform.select({
+                          ios: `${scheme}${label}@${latLng}`,
+                          android: `${scheme}${latLng}(${label})`
+                        });
+                       
+                        Linking.openURL(url)
+                
+                        }}
+
+                >
+                    <TextSelectIdioma style={{ alignSelf: "center", justifyContent:"center", margin: 4 }}>{translate('search')}</TextSelectIdioma>
+                </ButtonToHospital>
+
                 <ButtonChangeIdioma
                     style={{ marginRight: 24, marginTop: 18, justifyContent: "center", alignItems: "center" }}
                     onPress={()=>{
                         navigation.navigate('Ask', {})}}
 
-                >
+         >
                     <TextSelectIdioma style={{ alignSelf: "center", margin: 8 }}>{translate('replay')}</TextSelectIdioma>
                 </ButtonChangeIdioma>
             </InsideRoundTop>
             <InsideRoundTopTwo>
                 <LottieView
-                    autoPlay={true}
+                    autoPlay={false}
                     loop={true}
                     style={{
                         width: 450,

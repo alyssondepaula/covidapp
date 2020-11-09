@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled.View`
   flex:1;
   flex-direction: column;
   align-items: center;
@@ -93,6 +93,18 @@ export const ButtonChangeIdioma = styled.TouchableOpacity`
    z-index: 3;
 `;
 
+export const ButtonToHospital = styled.TouchableOpacity`
+  background-color: transparent;
+  border: 1px;
+  border-color: white;
+  width: ${windowWidth * 0.45}px;
+   height: ${windowHeight * 0.07}px;
+   border-radius: 14px;
+   justify-content: center;
+   align-items:center;
+   z-index: 3;
+`;
+
 export const TextSelectIdioma = styled.Text`
   color: white;
   font-size: 18px;
@@ -151,4 +163,22 @@ export const ChangetoUs = styled.TouchableOpacity`
    align-self: center;
    z-index: 20;
    margin-top:24px;
+`;
+
+export const SignOutButton = styled.TouchableOpacity`
+  background-color: transparent;
+  border: 1px;
+  border-color: white;
+  width: ${windowWidth * 0.25}px;
+   height: ${windowHeight * 0.04}px;
+   border-radius: 14px;
+   justify-content: center;
+   align-items:center;
+   z-index: 3;
+`;
+
+export const TextSignOutButton = styled.Text`
+  align-self: center;
+  color: white;
+  font-size: 12px;
 `;

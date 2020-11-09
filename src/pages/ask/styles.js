@@ -6,7 +6,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export const Container = styled.View.attrs({
-  marginTop: 48
+  marginTop: 18
 })`
   flex: 1;
   flex-direction: column;
@@ -28,7 +28,7 @@ export const TextAsk = styled.Text`
   align-self:center;
   text-align: center;
   font-size: 18px;
-  margin: 36px;
+  margin: 24px;
   color: #8C89FA;
 `;
 

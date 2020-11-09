@@ -12,6 +12,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: #8C89FA;
+  padding: 24px;
 `;
 
 export const ButtonDash = styled.TouchableOpacity`

@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled.View`
   flex:1;
   flex-direction: column;
   align-items: center;
@@ -14,14 +14,16 @@ export const RoundTop = styled.View`
    background-color: #8C89FA;
    border-bottom-right-radius: 100px;
    width: ${windowWidth}px;
-   height: ${windowHeight * 0.40}px;
+   min-height: ${windowHeight * 0.20}px;
+   height: ${windowHeight * 0.35}px;
    flex-direction: row;
    align-items: center;
 `;
 
 export const InsideRoundTop = styled.View`
   width: ${windowWidth * 0.6}px;
-  height: ${windowHeight * 0.40}px;
+  min-height: ${windowHeight * 0.20}px;
+  height: ${windowHeight * 0.35}px;
    flex-direction: column;
    align-items:flex-start;
    justify-content: center;
@@ -31,6 +33,7 @@ export const InsideRoundTop = styled.View`
 
 export const InsideRoundTopTwo = styled.View`
   width: ${windowWidth * 0.40}px;
+  min-height: ${windowHeight * 0.20}px;
   height: ${windowHeight * 0.40}px;
    flex-direction: column;
    align-items:flex-end;

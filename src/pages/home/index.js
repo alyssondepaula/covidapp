@@ -31,18 +31,6 @@ import {
 
 const home = ({ navigation }) => {
 
-    const { t, i18n } = useTranslation('language');
-
-    const languages = useMemo(() => {
-        return [
-            { name: t('portuguese'), id: 'pt-BR' },
-            { name: t('english'), id: 'en-US' },
-        ];
-    }, [i18n.language]);
-
-    const onPressLanguage = useCallback(language => {
-        i18n.changeLanguage(language);
-    }, []);
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
 
@@ -54,13 +42,14 @@ const home = ({ navigation }) => {
         setOpenBox(!openBox)
     }
 
-    function changeFont(tamanho) {
-        fontText == 24 ? setFontText(0) : setFontText(24)
+    const changeFont = () => {
+         setFontText(0)
     }
+    const endChangeFont = () => {
+        setFontText(24)
+   }
 
-    
-
-    return <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
+    return <Container>
    {  /*   <Modal
             style={{
                 backgroundColor: '#fff',
@@ -90,8 +79,6 @@ const home = ({ navigation }) => {
                     </TxtSelectIdiom>
                 </ChangetoUs>
             </View> 
-
-
         </Modal> 
           */ }
         <RoundTop>
@@ -114,7 +101,7 @@ const home = ({ navigation }) => {
                         width: 450,
                         height: 450,
                         position: "absolute",
-                        bottom: -62,
+                        bottom: -52,
                         right: -65,
                         zIndex: -1,
                     }}
@@ -129,6 +116,7 @@ const home = ({ navigation }) => {
                 onChangeText={text => setName(text)}
                 onFocus={changeFont}
                 onSubmitEditing={changeFont}
+                onEndEditing={endChangeFont}
             ></InputName>
             <ButtonComecar
                 onPress={() => {
@@ -140,7 +128,6 @@ const home = ({ navigation }) => {
                 <TextSelectIdioma>{translate('start')}</TextSelectIdioma>
             </ButtonComecar>
         </RoundBottom>
-
     </Container >;
 }
 

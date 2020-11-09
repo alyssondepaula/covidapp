@@ -3,51 +3,32 @@ import { View, ScrollView, BackHandler, TouchableOpacity, StyleSheet, StatusBar,
 import { Ionicons } from '@expo/vector-icons';
 import asks from '../../assets/asks.json';
 import { translate } from '../../locales/index';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 
 import {
     Container,
     Header,
     NameView,
     TextAsk,
-    Bodyask,
     AskerView,
     ButtonAvaliar,
     TextAvaliar,
     TextAsker
 } from './styles';
-
-
+import { useAuth } from '../../context/auth';
 
 const ask = ({ route, navigation }) => {
-
-
 
    const [soma, setSoma] = useState(0)
     const [toHospital, setToHospital] = useState(false)
     const [currentData, setCurrentData] = useState(asks)
 
+    const { updateUser } = useAuth();
+
     const { nameUser } = route.params;
 
     useEffect(() => {
-
-        async function init(){
-
-            const value = await AsyncStorage.getItem('@askers')
-            if(value !== null) {
-                setCurrentData(JSON.parse(value))
-            }
-
-            currentData.asker.map(ask =>{
-
-                if(ask.active==true){ soma+ask.value}
-
-            })
-        }
-
-        init()
+        setSoma(0)
+        console.log('COMEÇOU COM '+ soma)
       },[]);
       
 
@@ -56,25 +37,10 @@ const ask = ({ route, navigation }) => {
         if(soma<0) setSoma(0)
         if(soma>10) setSoma(10)
         if(soma>5) setToHospital(true) 
-        if(soma<5) setToHospital(false)
+        if(soma<=5) setToHospital(false)
 
-        async function store(){
-        
-            try {
-                soma > 0 ? await AsyncStorage.setItem('@sum', 'true')
-                : await AsyncStorage.setItem('@sum', 'false')
-                    
-                const jsonValue = JSON.stringify(currentData)
-                await AsyncStorage.setItem('@askers', jsonValue)
 
-                const nameStore = nameUser.toString()
-                await AsyncStorage.setItem('@nameuser', nameStore)
-              } catch (e) {
-                // saving error
-              }
-
-        }
-        store();
+        updateUser(nameUser, soma)
 
       },[soma]);
 
@@ -82,23 +48,7 @@ const ask = ({ route, navigation }) => {
           console.log(toHospital.toString())
       },[toHospital]);
 
-      useEffect(() => {
-        const backAction = () => {
-          Alert.alert(translate('atettion'), translate('backexit'), [
-            {
-              text: translate('no'),
-              onPress: () => null,
-              style: 'cancel',
-            },
-            { text: translate('yes'), onPress: () => BackHandler.exitApp() },
-          ]);
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-    
-        return () => backHandler.remove();
-      }, []);
+     
     
     return <Container>
         <Header>
@@ -110,23 +60,33 @@ const ask = ({ route, navigation }) => {
         </NameView>
 
         <View style={{ flex: 1, marginBottom: 96, marginTop: 48 }}>
-            <ScrollView>
+            <ScrollView >
+                {
+                currentData.asker.map(item => {
 
-                {currentData.asker.map(item => {
-
-                     
-
-                   return ( <AskerView background={    
+                  if(item.id=='11' && currentData.asker[1].active==false){
+                      return;
+                  }
+                  if(item.id=='2' && currentData.asker[1].active==false){
+                    return;
+                }
+                if(item.id=='23' && currentData.asker[1].active==false){
+                    return;
+                }
+                    
+                   return ( 
+            
+                   <AskerView key={item.id} background={    
                         item.active == true 
                         ? '#8C89FA'
                         : '#fff'  
                 }
-                    
                     onPress={() =>{
                        item.active=!item.active
                        item.active == true ? setSoma(soma+item.value) : setSoma(soma-item.value)
                        
                    }}>
+                       
                        <TextAsker background={
                            item.active == true
                            ? '#fff'

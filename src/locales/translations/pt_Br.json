@@ -5,13 +5,13 @@
     "changeIdiom": "Selecione o seu idioma",
     "welcome": "Vamos fazer uma rápida análise. Esse aplicativo não substitui o exame diagnostico.",
     "welcomename": "Seja bem vindo!",
-    "ask1": "Esteve em local publico como: bar, restaurante, cinema, shopping center ou outros locais publicos?",
-    "ask11": "Nesses locais ultilizou Mascara ?",
-    "ask2": "Teve contato com outras pessoas que estavam sem mascara ?",
-    "ask23": "Quantas horas voce ficou nesse estabelecimento: 2 horas, 4 horas, 6 horas, + de 6 horas?",
-    "ask3": "Utilizou alcool em Gel?",
-    "ask4": "Atualmente está trabalhando em casa ou no local do trabalho ?",
-    "ask99": "Atualmente ou recentemente você sentiu febre, tosse,espirro e dificuldade em respirar?",
+    "ask1": "Estive em local publico como: bar, restaurante, cinema, shopping center ou outros locais publicos?",
+    "ask11": "Nesses locais não utilizei mascara ?",
+    "ask2": "Tive contato com outras pessoas que estavam sem mascara",
+    "ask23": "Fiquei nesse estabelecimento por mais de: 2 horas",
+    "ask3": "Não utilizei alcool em Gel no dia / nos últimos dias",
+    "ask4": "Atualmente não estou trabalhando em home office",
+    "ask99": "Atualmente ou recentemente tive febre, tosse,espirro e dificuldade em respirar",
     "near": "Encontre hospitais próximos",
     "okay": "Eu estou bem!",
 
@@ -34,6 +34,7 @@
     "notification10": "Mesmo quando você conhecer uma pessoa, use uma máscara ao falar.",
 
     "replay": "Refazer avaliação",
+    "exit": "Sair",
 
     "backexit" : "Deseja sair do App?",
     "yes": "Sim",

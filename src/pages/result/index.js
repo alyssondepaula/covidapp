@@ -10,9 +10,11 @@ import { Container,
     ButtontoHospital,
     TextResultButton,
     TextResultAlert } from './styles';
+import { useAuth } from '../../context/auth';
 
 const result = ({ route, navigation }) => {
 
+ const {  signIn, signed  } = useAuth();
  const { somaUser } = route.params;
  const [percentageNumber, setPercentageNumber] = useState(0)
  const [lat, setLat] = useState(null)
@@ -27,27 +29,6 @@ const result = ({ route, navigation }) => {
              percentage()
              console.log(percentageNumber+' %')
   },[]);
-
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert(translate('atettion'), translate('backexit'), [
-        {
-          text: translate('no'),
-          onPress: () => null,
-          style: 'cancel',
-        },
-        { text: translate('yes'), onPress: () => BackHandler.exitApp() },
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
-    return () => backHandler.remove();
-  }, []);
-
-  
-
 
   async function getLocationAsync() {
     // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
@@ -64,7 +45,7 @@ const result = ({ route, navigation }) => {
 
     <TextResultAlert>{somaUser<5 ? translate('resulteasy') : translate('resulthard')}</TextResultAlert>
 
-     { somaUser > 5 ? <ButtontoHospital style={{marginVertical: 8}}>
+     { somaUser >= 5 ? <ButtontoHospital style={{marginVertical: 8}}>
          <TextResultButton
 
 onPress={()=>{
@@ -75,16 +56,19 @@ onPress={()=>{
       ios: `${scheme}${label}@${latLng}`,
       android: `${scheme}${latLng}(${label})`
     });
-    Linking.openURL(url);
-             
-             }}>{translate('near')
-             
-             
-             }</TextResultButton>
+   
+    Linking.openURL(url)
+    signIn()
+
+    }}>{translate('near')}</TextResultButton>
      </ButtontoHospital> : null}
       <ButtonDash  style={{marginVertical: 8}} 
       onPress={()=>{
-        navigation.navigate('Dash', {})
+        if( Boolean(signed)){ navigation.navigate('Dash') }
+        else{ 
+        navigation.navigate('Home') 
+        signIn() 
+      }
 }}>
 <TextResultButton>{translate('okay')}</TextResultButton>
       </ButtonDash>
