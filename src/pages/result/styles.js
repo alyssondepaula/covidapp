@@ -40,6 +40,7 @@ export const TextResultButton = styled.Text`
   align-self:center;
   margin: 24px;
   color: #8C89FA;
+  font-size: ${normalize(16)}px;
 `;
 
 export const TextResultAlert = styled.Text`

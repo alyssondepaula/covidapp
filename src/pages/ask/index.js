@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, BackHandler, TouchableOpacity, StyleSheet, StatusBar, Text, SafeAreaView, Alert } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import asks from '../../assets/asks.json';
 import { translate } from '../../locales/index';

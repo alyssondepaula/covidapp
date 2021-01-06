@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
+import normalize from '../../Fontnormalize';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -90,7 +91,8 @@ export const ButtonChangeIdioma = styled.TouchableOpacity`
 
 export const TextSelectIdioma = styled.Text`
   color: white;
-  font-size: 18px;
+  font-size: ${normalize(16)}px;
+
 `;
 
 export const TextBemVindo = styled.Text`
@@ -117,7 +119,8 @@ export const ModalClose = styled.View`
 export const TxtSelectIdiom = styled.Text`
   align-self: center;
   color: gray;
-  font-size: 20px;
+  font-size: ${normalize(18)}px;
+
 `;
 
 export const ChangetoPt = styled.TouchableOpacity`

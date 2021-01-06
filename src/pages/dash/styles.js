@@ -1,8 +1,10 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
+import normalize from '../../Fontnormalize';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 
 export const Container = styled.View`
   flex:1;
@@ -40,12 +42,16 @@ export const InsideRoundTopTwo = styled.View`
 
 `;
 
-export const RoundBottom = styled.View`
-   flex:1;
-   flex-direction: column;
-   align-items: flex-end;
-   justify-content: center;
-   
+export const RoundBottom = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: {
+    alignItems: 'center'
+  },
+})`
+   width: 95%;
+   flex: 1;
+   flex-direction: row;
 `;
 
 export const InputName = styled.TextInput`
@@ -62,24 +68,21 @@ export const InputName = styled.TextInput`
 `;
 
 
-export const Tips = styled.View`
-  position: absolute;
-  background-color: transparent;
-  border: 3px;
+export const Tips = styled.TouchableOpacity`
+  border: 2px;
   border-color: #8C89FA;
   width: ${windowWidth * 0.33}px;
    height: ${windowHeight * 0.25}px;
-   bottom: 36px;
+   margin-bottom: 12px;
    border-radius: 14px;
-   justify-content:center;
-   align-items:center;
-   align-self: center;
+   justify-content:flex-start;
+   align-items:flex-start;
+   align-self: flex-end;
+   margin-left: 8px;
+  
+    
 `;
-export const TipsButton = styled.View`
-  flex: 1;
-  width: 100%;
-  background-color: green;
-`;
+
 
 export const ButtonChangeIdioma = styled.TouchableOpacity`
   background-color: transparent;
@@ -107,13 +110,13 @@ export const ButtonToHospital = styled.TouchableOpacity`
 
 export const TextSelectIdioma = styled.Text`
   color: white;
-  font-size: 18px;
+ font-size: ${normalize(14)}px;
 `;
 
 export const TextBemVindo = styled.Text`
   align-self:center;
-  margin: 24px;
   color: #8C89FA;
+  font-size: ${normalize(14)}px;
 `;
 
 export const Modal = styled.View`
@@ -129,12 +132,13 @@ export const ModalClose = styled.View`
    justify-content: flex-end;
    padding-top: 18px;
    padding-right: 24px;
+   
 `;
 
 export const TxtSelectIdiom = styled.Text`
   align-self: center;
   color: gray;
-  font-size: 20px;
+  font-size: ${normalize(18)}px;
 `;
 
 export const ChangetoPt = styled.TouchableOpacity`
@@ -166,7 +170,9 @@ export const ChangetoUs = styled.TouchableOpacity`
 `;
 
 export const SignOutButton = styled.TouchableOpacity`
-  background-color: transparent;
+  position: absolute;
+  top:${windowWidth * 0.005}px;
+  right: ${windowHeight * 0.005}px;
   border: 1px;
   border-color: white;
   width: ${windowWidth * 0.25}px;
@@ -180,5 +186,28 @@ export const SignOutButton = styled.TouchableOpacity`
 export const TextSignOutButton = styled.Text`
   align-self: center;
   color: white;
-  font-size: 12px;
+  font-size: ${normalize(12)}px;
+`;
+
+export const RoundCenter = styled.View`
+   width: ${windowWidth* 0.95}px;
+   height: ${windowHeight * 0.20}px;
+   flex-direction: row;
+   align-items: center;
+   padding: 8px;
+`;
+
+export const ViewTips = styled.View`
+   width: 90%;
+   height: 75%;
+   flex-direction: column;
+   align-self:center;
+   margin: 8px;
+`;
+
+export const TextTips = styled.Text`
+  color: #8C89FA;
+ font-size: ${normalize(18)}px;
+ margin: 24px;
+ font-weight: bold;
 `;

@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import { Dimensions } from 'react-native';
+import normalize from '../../Fontnormalize';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,7 +28,7 @@ export const NameView = styled.View`
 export const TextAsk = styled.Text`
   align-self:center;
   text-align: center;
-  font-size: 18px;
+font-size: ${normalize(16)}px;
   margin: 24px;
   color: #8C89FA;
 `;
@@ -66,11 +67,11 @@ export const ButtonAvaliar = styled.TouchableOpacity`
 
 export const TextAvaliar = styled.Text`
   color: white;
-  font-size: 18px;
+  font-size: ${normalize(16)}px;
 `;
 
 export const TextAsker = styled.Text`
   text-align: center;
   color:  ${props => props.background};
-  font-size: 14px;
+  font-size: ${normalize(12)}px;
 `;

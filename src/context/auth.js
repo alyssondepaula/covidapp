@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
 
     const [logged, setLogged] = useState(null);
     const [User, setUser] = useState(UserData);
+    const [languageNow, setLanguageNow] = useState('');
 
     useEffect(()=>{
 
@@ -54,17 +55,28 @@ const AuthProvider = ({ children }) => {
   try {
     await AsyncStorage.multiRemove(keys)
   } catch(e) {
-    // remove error
+    throw new Error('Error multi remove in Auth.');
   }
         setLogged(false)
       }
 
      async function updateUser (nameUser, somaUser){
          setUser({name: nameUser, soma:somaUser})
-      }    
+      }   
+      
+      async function updateLanguage (language){
+        setLanguageNow(language)
+
+        try {
+          await AsyncStorage.setItem('@RNLANGUAGE', language)
+        } catch (e) {
+          throw new Error('Error set Language.');
+        }
+
+     }    
   
   return (
-    <AuthContext.Provider value={{signed: logged, signIn, signOut, updateUser}}>
+    <AuthContext.Provider value={{signed: logged, languageNow, signIn, signOut, updateUser, updateLanguage}}>
         {children}
     </AuthContext.Provider>
   );
